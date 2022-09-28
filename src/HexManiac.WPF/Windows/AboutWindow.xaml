@@ -7,10 +7,10 @@
    <Border Background="{StaticResource HexBrush}">
       <DockPanel Margin="15" TextOptions.TextFormattingMode="Display">
          <TextBlock DockPanel.Dock="Bottom" FontStyle="Italic" TextWrapping="Wrap">
-            Hex Maniac Advance is a non-profit open-source fan-made tool.
-            Only use it with legally purchased software.
-            Pokemon is the property of Nintendo and GameFreak.
-            Please support the official release.
+            Hex Maniac Advance es una herramienta de código abierto sin ánimo de lucro creada por aficionados.
+            Utilízala sólo con software adquirido legalmente.
+            Pokemon es propiedad de Nintendo y GameFreak.
+            Por favor, apoya la versión oficial.
          </TextBlock>
          <TextBlock DockPanel.Dock="Top" VerticalAlignment="Center" FontWeight="Bold" Text="Hex Maniac Advance" FontSize="20"/>
          <Image Source="..\Resources\AppImage.png" DockPanel.Dock="Left" RenderOptions.BitmapScalingMode="Fant" Width="200"/>
