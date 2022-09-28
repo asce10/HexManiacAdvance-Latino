@@ -1,0 +1,21 @@
+
+# User-specific files
+*.suo
+*.user
+launchSettings.json
+
+# example binary files
+sampleFiles/
+
+# Build results
+artifacts/
+obj/
+*.coverage
+
+# Visual Studio 2015 cache/options directory
+.vs/
+
+# local downloaded nuget packages
+packages/
+
+

@@ -1,0 +1,341 @@
+# conditions:
+# 00 A = B
+# 01 A != B
+# 02 A > B
+# 03 A < B
+# 04 A & B   <- at least one common bit
+# 05 A &~ B  <- no common bits
+
+00 attackcanceler
+01 accuracycheck param0<> param1:
+02 attackstring
+03 ppreduce
+04 critcalc
+05 damagecalc
+06 typecalc
+07 adjustnormaldamage
+08 adjustnormaldamage2
+09 attackanimation
+0a waitanimation
+0b healthbarupdate battler.
+0c datahpupdate battler.
+0d critmessage
+0e effectivenesssound
+0f resultmessage
+10 printstring id:
+11 printselectionstring id:
+12 waitmessage param0:
+13 printfromtable ptr<>
+14 printselectionstringfromtable ptr<>
+15 seteffectwithchance
+16 seteffectprimary
+17 seteffectsecondary
+18 clearstatusfromeffect battler.
+19 tryfaintmon battler. fromMove. ptr<>
+1a dofaintanimation battler.
+1b cleareffectsonfaint battler.
+1c jumpifstatus battler. status1:: ptr<>
+1d jumpifstatus2 battler. status2:: ptr<>
+1e jumpifability param0. ability. ptr<>
+1f jumpifsideaffecting battler. sidestatus: ptr<>
+20 jumpifstat battler. ifflag. stat. value. ptr<>
+21 jumpifstatus3condition battler. status3:: param2. ptr<>
+22 jumpiftype battler. type. ptr<>
+23 getexp battler.
+24 checkteamslost ptr<>
+25 movevaluescleanup
+26 setmultihit value.
+27 decrementmultihit ptr<>
+28 goto ptr<>
+29 jumpifbyte ifflag.battle_compare param1:: param2. ptr<>
+2a jumpifhalfword ifflag.battle_compare address:: value: ptr<>
+2b jumpifword ifflag.battle_compare param1:: param2:: ptr<>
+2c jumpifarrayequal param0:: param1:: param2. ptr<>
+2d jumpifarraynotequal param0:: param1:: param2. ptr<>
+2e setbyte ram:: param1.
+2f addbyte ram:: param1.
+30 subbyte ram:: param1.
+31 copyarray param0:: param1:: param2.
+32 copyarraywithindex param0:: param1:: param2:: param3.
+33 orbyte ram:: param1.
+34 orhalfword ram:: param1:
+35 orword ram:: param1::
+36 bicbyte ram:: param1.
+37 bichalfword ram:: param1:
+38 bicword ram:: param1::
+39 pause param0:
+3a waitstate
+3b healthbar_update battler.
+3c return
+3d end
+3e end2
+3f end3
+40 jumpifaffectedbyprotect ptr<>
+41 call ptr<>
+42 jumpiftype2 battler. type. ptr<>
+43 jumpifabilitypresent ability. ptr<>
+44 endselectionscript
+45 playanimation battler. param1. param2::
+46 playanimation2 battler. param1:: param2::
+47 setgraphicalstatchangevalues
+48 playstatchangeanimation battler. param1. param2.
+49 moveend param0. param1.
+
+# Help macros for 5 uses of moveend command	
+#XX moveendall               # All cases
+#   moveend 0, 0
+#XX se moveendcase case      # Chosen case
+#   moveend 1, 0
+#XX om moveendfrom from      # All cases from (inclusive)
+#   moveend 0, 0
+#XX moveendto {to}           # All cases from 0 to (not inclusive)
+#   moveend 2, {to}
+#XX om moveendfromto from, {to}    # Cases from (inclusive) to (not inclusive)
+#   moveend 2, {to}
+
+4a typecalc2
+4b returnatktoball
+4c getswitchedmondata battler.
+4d switchindataupdate battler.
+4e switchinanim battler. dontclearsubstitutebit.
+4f jumpifcantswitch battler. ptr<>
+50 openpartyscreen param0. ptr<>
+51 switchhandleorder battler. param1.
+52 switchineffects battler.
+53 trainerslidein battler.
+54 playse song:
+55 fanfare song:
+56 playfaintcry battler.
+57 endlinkbattle
+58 returntoball battler.
+59 handlelearnnewmove param0<> param1<> param2.
+5a yesnoboxlearnmove ptr<>
+5b yesnoboxstoplearningmove ptr<>
+5c hitanimation battler.
+[BPRE_BPGE] 5d getmoneyreward ptr<>
+[BPEE_AXPE_AXVE] 5d getmoneyreward
+5e updatebattlermoves battler.
+5f swapattackerwithtarget
+60 incrementgamestat param0.
+61 drawpartystatussummary battler.
+62 hidepartystatussummary battler.
+63 jumptocalledmove param0.
+64 statusanimation battler.
+65 status2animation battler. status2::
+66 chosenstatusanimation battler. param1. param2::
+67 yesnobox
+68 cancelallactions
+69 adjustsetdamage
+6a removeitem battler.
+6b atknameinbuff1
+6c drawlvlupbox
+6d resetsentmonsvalue
+6e setatktoplayer0
+6f makevisible battler.
+70 recordlastability battler.
+71 buffermovetolearn
+72 jumpifplayerran ptr<>
+73 hpthresholds battler.
+74 hpthresholds2 battler.
+75 useitemonopponent
+76 various battler. param1.
+77 setprotectlike
+78 faintifabilitynotdamp
+79 setatkhptozero
+7a jumpifnexttargetvalid ptr<>
+7b tryhealhalfhealth ptr<> battler.
+7c trymirrormove
+7d setrain
+7e setreflect
+7f setseeded
+80 manipulatedamage param0.
+81 trysetrest ptr<>
+82 jumpifnotfirstturn ptr<>
+83 nop
+84 jumpifcantmakeasleep ptr<>
+85 stockpile
+86 stockpiletobasedamage ptr<>
+87 stockpiletohpheal ptr<>
+88 negativedamage
+89 statbuffchange param0. ptr<>
+8a normalisebuffs
+8b setbide
+8c confuseifrepeatingattackends
+8d setmultihitcounter param0.
+8e initmultihitstring
+8f forcerandomswitch ptr<>
+90 tryconversiontypechange ptr<>
+91 givepaydaymoney
+92 setlightscreen
+93 tryKO ptr<>
+94 damagetohalftargethp
+95 setsandstorm
+96 weatherdamage
+97 tryinfatuating ptr<>
+98 updatestatusicon battler.
+99 setmist
+9a setfocusenergy
+9b transformdataexecution
+9c setsubstitute
+9d mimicattackcopy ptr<>
+9e metronome
+9f dmgtolevel
+a0 psywavedamageeffect
+a1 counterdamagecalculator ptr<>
+a2 mirrorcoatdamagecalculator ptr<>
+a3 disablelastusedattack ptr<>
+a4 trysetencore ptr<>
+a5 painsplitdmgcalc ptr<>
+a6 settypetorandomresistance ptr<>
+a7 setalwayshitflag
+a8 copymovepermanently ptr<>
+a9 trychoosesleeptalkmove ptr<>
+aa setdestinybond
+ab trysetdestinybondtohappen
+ac remaininghptopower
+ad tryspiteppreduce ptr<>
+ae healpartystatus
+af cursetarget ptr<>
+b0 trysetspikes ptr<>
+b1 setforesight
+b2 trysetperishsong ptr<>
+b3 rolloutdamagecalculation
+b4 jumpifconfusedandstatmaxed stat. ptr<>
+b5 furycuttercalc
+b6 happinesstodamagecalculation
+b7 presentdamagecalculation
+b8 setsafeguard
+b9 magnitudedamagecalculation
+ba jumpifnopursuitswitchdmg ptr<>
+bb setsunny
+bc maxattackhalvehp ptr<>
+bd copyfoestats ptr<>
+be rapidspinfree
+bf setdefensecurlbit
+c0 recoverbasedonsunlight ptr<>
+c1 hiddenpowercalc
+c2 selectfirstvalidtarget
+c3 trysetfutureattack ptr<>
+c4 trydobeatup param0<> param1<>
+c5 setsemiinvulnerablebit
+c6 clearsemiinvulnerablebit
+c7 setminimize
+c8 sethail
+c9 jumpifattackandspecialattackcannotfall ptr<>
+ca setforcedtarget
+cb setcharge
+cc callterrainattack
+cd cureifburnedparalysedorpoisoned ptr<>
+ce settorment ptr<>
+cf jumpifnodamage ptr<>
+d0 settaunt ptr<>
+d1 trysethelpinghand ptr<>
+d2 tryswapitems ptr<>
+d3 trycopyability ptr<>
+d4 trywish param0. param1<>
+d5 trysetroots ptr<>
+d6 doubledamagedealtifdamaged
+d7 setyawn ptr<>
+d8 setdamagetohealthdifference ptr<>
+d9 scaledamagebyhealthratio
+da tryswapabilities ptr<>
+db tryimprison ptr<>
+dc trysetgrudge ptr<>
+dd weightdamagecalculation
+de assistattackselect ptr<>
+df trysetmagiccoat ptr<>
+e0 trysetsnatch ptr<>
+e1 trygetintimidatetarget ptr<>
+e2 switchoutabilities battler.
+e3 jumpifhasnohp battler. ptr<>
+e4 getsecretpowereffect
+e5 pickup
+e6 docastformchangeanimation
+e7 trycastformdatachange
+e8 settypebasedhalvers ptr<>
+e9 setweatherballtype
+ea tryrecycleitem ptr<>
+eb settypetoterrain ptr<>
+ec pursuitdoubles ptr<>
+ed snatchsetbattlers
+ee removelightscreenreflect
+ef handleballthrow
+f0 givecaughtmon
+f1 trysetcaughtmondexflags ptr<>
+f2 displaydexinfo
+f3 trygivecaughtmonnick ptr<>
+f4 subattackerhpbydmg
+f5 removeattackerstatus1
+f6 finishaction
+f7 finishturn
+[BPEE] f8 trainerslideout battler.
+
+# various command changed to more readable macros
+#XX cancelmultiturnmoves {battler}
+#	various {battler} 0
+#XX setmagiccoattarget {battler}
+#	various {battler} 1
+#XX getifcantrunfrombattle {battler}
+#	various {battler} 2
+#XX getmovetarget {battler}
+#	various {battler} 3
+#XX various4 {battler}
+#	various {battler} 4
+#XX resetintimidatetracebits {battler}
+#	various {battler} 5
+#XX updatechoicemoveonlvlup {battler}
+#	various {battler} 6
+#XX various7 {battler}
+#	various {battler} 7
+#XX various8 {battler}
+#	various {battler} 8
+#XX returnopponentmon1toball {battler}
+#	various {battler} 9
+#XX returnopponentmon2toball {battler}
+#	various {battler} 10
+#XX checkpokeflute {battler}
+#	various {battler} 11
+#XX waitfanfare {battler}
+#	various {battler} 12
+
+# helpful macros
+#XX setstatchanger {stat} {stages} {down}
+#	setbyte sSTATCHANGER {stat} | {stages} << 4 | {down} << 7
+#XX setmoveeffect {effect}
+#	setbyte cEFFECT_CHOOSER {effect}
+#XX chosenstatus1animation {battler} {status}
+#	chosenstatusanimation {battler} 0x0 {status}
+#XX chosenstatus2animation {battler} {status}
+#	chosenstatusanimation {battler} 0x1 {status}
+#XX sethword {dst} {value}
+#	setbyte {dst} {value} & 0xFF
+#	setbyte {dst} + 1 ({value} >> 8) & 0xFF
+#XX setword {dst} {value}
+#	setbyte {dst}, {value} & 0xFF
+#	setbyte {dst} + 1 ({value} >> 8) & 0xFF
+#	setbyte {dst} + 2 ({value} >> 16) & 0xFF
+#	setbyte {dst} + 3 ({value} >> 24) & 0xFF
+#XX copybyte {dst} {src}
+#	copyarray {dst} {src} 0x1
+#XX copyhword {dst} {src}
+#	copyarray {dst} {src} 0x2
+#XX copyword {dst} {src}
+#	copyarray {dst} {src} 0x4
+#XX jumpifbytenotequal {byte1} {byte2} {jumpptr}
+#	jumpifarraynotequal {byte1} {byte2} 1 {jumpptr}
+#XX jumpifbyteequal {byte1} {byte2} {jumpptr}
+#	jumpifarrayequal {byte1} {byte2} 1 {jumpptr}
+#XX jumpifmove {move} {jumpptr}
+#	jumpifhalfword CMP_EQUAL gCurrentMove {move} {jumpptr}
+#XX jumpifnotmove {move} {jumpptr}
+#	jumpifhalfword CMP_NOT_EQUAL gCurrentMove {move} {jumpptr}
+#XX jumpifstatus3 {battler} {status} {jumpptr}
+#	jumpifstatus3condition {battler} {status} 0 {jumpptr}
+#XX jumpifnostatus3 {battler} {status} {jumpptr}
+#	jumpifstatus3condition {battler} {status} 1 {jumpptr}
+#XX jumpifmovehadnoeffect {jumpptr}
+#	jumpifbyte CMP_COMMON_BITS gMoveResultFlags MOVE_RESULT_NO_EFFECT {jumpptr}
+#XX jumpifbattletype {flags} {jumpptr}
+#	jumpifword CMP_COMMON_BITS gBattleTypeFlags {flags} {jumpptr}
+#XX jumpifnotbattletype {flags} {jumpptr}
+#	jumpifword CMP_NO_COMMON_BITS gBattleTypeFlags {flags} {jumpptr}
