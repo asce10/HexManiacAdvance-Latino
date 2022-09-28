@@ -78,16 +78,16 @@ namespace HavenSoft.HexManiac.WPF.Windows {
 
       private void HandleException(object sender, DispatcherUnhandledExceptionEventArgs e) {
          var text = new StringBuilder();
-         text.AppendLine("Version Number:" + ViewModel.Singletons.MetadataInfo.VersionNumber);
+         text.AppendLine("Número de Version:" + ViewModel.Singletons.MetadataInfo.VersionNumber);
 #if DEBUG
          text.AppendLine("Debug Version");
 #else
-         text.AppendLine("Release Version");
+         text.AppendLine("Versión de lanzamiento");
 #endif
          text.AppendLine(DateTime.Now.ToString());
-         text.AppendLine("General Information:");
+         text.AppendLine("Información general:");
          AppendGeneralAppInfo(text);
-         text.AppendLine("Exception Information:");
+         text.AppendLine("Información de excepción:");
          AppendException(text, e.Exception);
          text.AppendLine("-------------------------------------------");
          text.AppendLine(Environment.NewLine);
@@ -100,17 +100,17 @@ namespace HavenSoft.HexManiac.WPF.Windows {
             "```",
             shortError + "...",
             "```",
-            "Let me tell you what I was doing right before I got the crash:",
+            "Déjenme decirles lo que estaba haciendo justo antes de recibir el choque,crash:",
          });
          var exceptionInfo = ExtractExceptionInfo(e.Exception);
          FileSystem.ShowCustomMessageBox(
-            "An unhandled error occured. Please report it on Discord or open an issue on GitHub." + Environment.NewLine +
-            Title + " might be in a bad state. You should close as soon as possible." + Environment.NewLine +
-            "Here's a summary of the issue:" + Environment.NewLine +
+            "Se ha producido un error no gestionado. Por favor, informa de ello en Discord o abre una incidencia en GitHub." + Environment.NewLine +
+            Title + " puede estar en mal estado. Debe cerrar lo antes posible." + Environment.NewLine +
+            "Este es un resumen del tema:" + Environment.NewLine +
             Environment.NewLine +
             exceptionInfo + Environment.NewLine +
-            "The error has been logged to crash.log" + Environment.NewLine +
-            "You may want to:",
+            "El error se ha registrado en crash.log" + Environment.NewLine +
+            "Es posible que quiera:",
             showYesNoCancel: false,
             new ProcessModel("Show crash.log in Explorer", "."),
             new ProcessModel("Report this via Discord", "https://discord.gg/Re6E6ePpFc"),
@@ -247,7 +247,7 @@ namespace HavenSoft.HexManiac.WPF.Windows {
                                     },
                                  },
                                  new Button {
-                                    Content = "Cancel",
+                                    Content = "Cancelar",
                                     IsCancel = true,
                                     Margin = new Thickness(5),
                                     Command = new StubCommand {
@@ -281,9 +281,9 @@ namespace HavenSoft.HexManiac.WPF.Windows {
             if (ViewModel.SelectedTab is not IEditableViewPort) return;
             foreach (var fileName in files) {
                if (fileName.ToLower().EndsWith(".ips")) {
-                  ViewModel.OverlayText = "Apply IPS Patch";
+                  ViewModel.OverlayText = "Aplicar Parche IPS";
                } else if (fileName.ToLower().EndsWith(".ups")) {
-                  ViewModel.OverlayText = "Apply UPS Patch";
+                  ViewModel.OverlayText = "Aplicar Parche UPS";
                } else if (fileName.ToLower().EndsWith(".hma")) {
                   var lines = File.ReadLines(fileName)
                      .Until(string.IsNullOrEmpty)
@@ -518,7 +518,7 @@ namespace HavenSoft.HexManiac.WPF.Windows {
       #region Developer Utilities
 
       private void DeveloperRaiseAssert(object sender, RoutedEventArgs e) {
-         Debug.Assert(false, "Intentional Assert");
+         Debug.Assert(false, "Afirmación intencional");
       }
 
       private void DeveloperThrowArgumentOutOfRangeException(object sender, RoutedEventArgs e) {
@@ -533,7 +533,7 @@ namespace HavenSoft.HexManiac.WPF.Windows {
 
       private void DeveloperWriteDebug(object sender, RoutedEventArgs e) => Debug.WriteLine("Debug");
 
-      private void DeveloperWriteTrace(object sender, RoutedEventArgs e) => Trace.WriteLine("Trace");
+      private void DeveloperWriteTrace(object sender, RoutedEventArgs e) => Trace.WriteLine("Rastreo");
 
       private void DeveloperRenderRomOverview() {
          var tab = (ViewPort)ViewModel.SelectedTab;
